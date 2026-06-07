@@ -9,3 +9,6 @@ matplotlib
 python-resize-image
 plotly
 geopy
+streamlit-geolocation
+streamlit-lottie
+streamlit-option-menu
