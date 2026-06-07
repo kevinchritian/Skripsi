@@ -8,3 +8,4 @@ pathlib
 matplotlib
 python-resize-image
 plotly
+geopy
