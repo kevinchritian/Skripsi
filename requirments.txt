@@ -1,9 +1,0 @@
-streamlit
-tensorflow==2.12.0
-numpy
-pandas
-Pillow
-geopy
-streamlit-geolocation
-streamlit-lottie
-streamlit-option-menu
