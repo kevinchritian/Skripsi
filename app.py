@@ -3,6 +3,7 @@ import numpy as np
 from PIL import Image
 from tensorflow.keras.models import load_model
 
+
 st.set_page_config(layout="wide")
 
 st.markdown("""
@@ -259,65 +260,68 @@ if location and location.get("latitude") and location.get("longitude"):
             user_location = (lat, lon)
 
             ditemukan = False
+            
+            if barang not in kategori_barang:
+                st.warning("⚠️ Lokasi tidak ditemukan untuk kategori barang ini.")
+            else:
+                for kategori in kategori_barang.get(barang, []):
 
-            for kategori in kategori_barang.get(barang, []):
+                    for nama, koordinat in lokasi[kategori].items():
 
-                for nama, koordinat in lokasi[kategori].items():
+                        jarak = geodesic(
+                            user_location,
+                            koordinat
+                        ).km
 
-                    jarak = geodesic(
-                        user_location,
-                        koordinat
-                    ).km
+                        if jarak <= 2:
 
-                    if jarak <= 2:
+                            tujuan_lat, tujuan_lon = koordinat
 
-                        tujuan_lat, tujuan_lon = koordinat
+                            url = (
+                                f"https://www.google.com/maps/dir/"
+                                f"{lat},{lon}/"
+                                f"{tujuan_lat},{tujuan_lon}"
+                            )
 
-                        url = (
-                            f"https://www.google.com/maps/dir/"
-                            f"{lat},{lon}/"
-                            f"{tujuan_lat},{tujuan_lon}"
-                        )
+                            st.success(
+                                f"{nama} ({jarak:.2f} km)"
+                            )
 
-                        st.success(
-                            f"{nama} ({jarak:.2f} km)"
-                        )
+                            # Informasi tambahan berdasarkan kategori
+                            if kategori == "ewaste_kecil":
 
-                        # Informasi tambahan berdasarkan kategori
-                        if kategori == "ewaste_kecil":
+                                st.info("""
+                        Jam Operasional : 24 Jam
+                                """)
 
-                            st.info("""
-                    Jam Operasional : 24 Jam
-                            """)
+                            elif kategori == "ewaste_besar":
 
-                        elif kategori == "ewaste_besar":
+                                st.info("""
+                        Jam Operasional : Senin - Jumat
+                        08:00 - 17:00 WIB
 
-                            st.info("""
-                    Jam Operasional : Senin - Jumat
-                    08:00 - 17:00 WIB
+                        Kontak : xxxx
+                                """)
 
-                    Kontak : xxxx
-                            """)
+                            elif kategori == "laptop_bekas":
 
-                        elif kategori == "laptop_bekas":
+                                st.info("""
+                        Jam Operasional : Unknown
+                        Kontak : Unknown
+                                """)
 
-                            st.info("""
-                    Jam Operasional : Unknown
-                    Kontak : Unknown
-                            """)
+                            st.markdown(
+                                f"🗺️ [Map]({url})"
+                            )
 
-                        st.markdown(
-                            f"🗺️ [Map]({url})"
-                        )
+                            st.divider()
 
-                        st.divider()
+                            ditemukan = True
 
-                        ditemukan = True
-
-            if not ditemukan:
-                st.warning(
-                    "Tidak ada lokasi dalam radius 2 km."
-                )
+                if not ditemukan:
+                    st.warning(
+                        "Tidak ada lokasi dalam radius 2 km."
+                    )
 
 else:
 
