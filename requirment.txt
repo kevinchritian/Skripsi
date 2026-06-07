@@ -4,6 +4,6 @@ streamlit-geolocation
 numpy
 pandas
 Pillow
-tensorflow==2.16.1
+tensorflow-cpu==2.16.1
 streamlit-lottie
 streamlit-option-menu
