@@ -13,11 +13,9 @@ https://skripsi-4qqdhhzwyh76t3m52wwrzc.streamlit.app/
 
 ## Screenshots
 
-![App Screenshot](https://dummyimage.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](./gambar/Screenshot%202026-08-28%20071859.png)
 
-![App Screenshot](https://dummyimage.com/468x300?text=App+Screenshot+Here)
-
-![App Screenshot](https://dummyimage.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](./gambar/Screenshot%202026-08-28%20072003.png)
 
 ## Tech Stack
 
